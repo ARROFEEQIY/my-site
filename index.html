@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MEMECRYPTO | Web3 Professional</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="shortcut icon" href="./assets/nn.jpg" type="image/x-icon">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <style>
+    :root {
+      --primary: #3B82F6;
+      --accent: #FF7A45;
+      --dark: #0F172A;
+      --darker: #020617;
+      --light: #F8FAFC;
+      --gradient: linear-gradient(135deg, var(--primary), var(--accent));
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    body {
+      background: var(--darker);
+      color: var(--light);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ===== ANIMATED NAVBAR ===== */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.5rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* ===== ANIMATED HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 5%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%);
+      z-index: -1;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+      /* ===== PERFECT PFP DISPLAY ===== */
+    .pfp-container {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 2rem;
+      position: relative;
+    }
+
+    .pfp {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+      border: 4px solid transparent;
+      background: 
+        linear-gradient(var(--darker), var(--darker)) padding-box,
+        var(--gradient) border-box;
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+      /* Ensures crisp rendering */
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+      -ms-interpolation-mode: nearest-neighbor;
+    }
+
+    .pfp-glow {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border-radius: 50%;
+      background: var(--gradient);
+      filter: blur(20px);
+      opacity: 0.3;
+      z-index: -1;
+      animation: pulse 3s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.3; }
+      100% { transform: scale(1.05); opacity: 0.5; }
+    }
+
+    /* ===== PROFESSIONAL HERO SECTION ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 5%;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 5rem;
+      margin-bottom: 1.5rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 2rem;
+      font-weight: 400;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    .hero-content {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .pfp {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    /* ===== SECTIONS ===== */
+    .section {
+      padding: 8rem 5%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--gradient);
+      border-radius: 3px;
+    }
+
+    /* ===== 3D SERVICE CARDS ===== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      perspective: 1000px;
+    }
+
+    .service-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 2.5rem;
+      transition: all 0.5s;
+      transform-style: preserve-3d;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to bottom right,
+        rgba(255, 122, 69, 0.1) 0%,
+        rgba(59, 130, 246, 0.1) 100%
+      );
+      transform: rotate(30deg);
+      z-index: -1;
+    }
+
+    .service-card i {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .service-card h4 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .service-card p {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* ===== CONTACT BUTTONS ===== */
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: all 0.3s;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .contact-link i {
+      font-size: 1.2rem;
+    }
+
+    .contact-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 3rem 5%;
+      background: rgba(15, 23, 42, 0.5);
+      margin-top: 5rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 992px) {
+      h1 { font-size: 3rem; }
+      .section { padding: 6rem 5%; }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: center;
+        gap: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      h1 { font-size: 2.5rem; }
+      h2 { font-size: 1.2rem; }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-links {
+        flex-direction: column;
+      }
+
+      .contact-link {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav id="navbar">
+    <div class="logo">MEMECRYPTO</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+   <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="pfp-container">
+        <div class="pfp-glow"></div>
+        <!-- Replace with your PFP -->
+        <img src="assets/nn.jpg" alt="Memecrypto" class="pfp">
+      </div>
+      <h1>MEMECRYPTO</h1>
+      <h2>Token Listing Manager & Web3 Community Builder</h2>
+    </div>
+  </section>
+
+  
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <h3 class="section-title">About Me</h3>
+    <p style="text-align: center; max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8;">
+      Hi, I'm Memecrypto — a Web3 professional specializing in token listings, community growth, and strategic collaborations. With expertise in community moderation, graphic design, and frontend development, I help projects establish their presence in the decentralized space. My approach combines technical knowledge with community-focused strategies to drive engagement and growth.
+    </p>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="section">
+    <h3 class="section-title">What I Do</h3>
+    <div class="services-grid">
+      <div class="service-card">
+        <i class="fas fa-coins"></i>
+        <h4>Token Listing Manager</h4>
+        <p>Secure listings on top exchanges and streamline the application process</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-handshake"></i>
+        <h4>Collab Manager</h4>
+        <p>Strategic partnerships with other projects and influencers</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-users"></i>
+        <h4>Community Ambassador</h4>
+        <p>Represent projects and engage with community members</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-shield-alt"></i>
+        <h4>Community Moderator</h4>
+        <p>Maintain healthy community engagement and enforce guidelines</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-palette"></i>
+        <h4>Graphics Designer</h4>
+        <p>Create eye-catching visuals for social media and marketing</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-code"></i>
+        <h4>Frontend Developer</h4>
+        <p>Build responsive and interactive Web3 interfaces</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <h3 class="section-title">Get In Touch</h3>
+    <div class="contact-links">
+      <a href="mailto:memecrypto362@gmail.com" class="contact-link">
+        <i class="fas fa-envelope"></i> memecrypto362@gmail.com
+      </a>
+      <a href="https://t.me/memecrypto727" class="contact-link" target="_blank">
+        <i class="fab fa-telegram"></i> @memecrypto727
+      </a>
+      <a href="https://x.com/MEMECRYPTO362" class="contact-link" target="_blank">
+        <i class="fab fa-x-twitter"></i> @MEMECRYPTO362
+      </a>
+      <a href="#" class="contact-link" target="_blank">
+        <i class="fab fa-discord"></i> memecrypto_362
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2024 MEMECRYPTO. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Initialize GSAP
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Navbar animation
+    gsap.from("#navbar", {
+      y: -100,
+      duration: 0.8,
+      ease: "power3.out",
+      delay: 0.2
+    });
+
+    // Hero content animation
+    const heroContent = document.querySelector('.hero-content');
+    const pfp = document.querySelector('.pfp');
+    
+   
+
+  
+
+    // Service cards animation
+    gsap.utils.toArray(".service-card").forEach((card, i) => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: ".services-grid",
+          start: "top 70%",
+          toggleActions: "play none none none"
+        },
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        delay: i * 0.1,
+        ease: "back.out(1.2)"
+      });
+    });
+
+    // Contact buttons animation
+    gsap.utils.toArray(".contact-link").forEach((btn, i) => {
+      gsap.from(btn, {
+        scrollTrigger: {
+          trigger: ".contact-links",
+          start: "top 80%",
+          toggleActions: "play none none none"
+        },
+        opacity: 0,
+        y: 30,
+        duration: 0.6,
+        delay: i * 0.1,
+        ease: "power2.out"
+      });
+    });
+
+    // 3D card tilt effect
+    document.querySelectorAll('.service-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const xAxis = (window.innerWidth / 2 - e.pageX) / 20;
+        const yAxis = (window.innerHeight / 2 - e.pageY) / 20;
+        card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+      });
+
+      card.addEventListener('mouseenter', () => {
+        card.style.transition = 'none';
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transition = 'all 0.5s ease';
+        card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+      });
+    });
+
+    // Professional animations
+    gsap.to(".hero-content", {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: "power3.out",
+      delay: 0.3
+    });
+
+    gsap.to(".pfp", {
+      scale: 1,
+      opacity: 1,
+      duration: 1,
+      ease: "elastic.out(1, 0.3)",
+      delay: 0.6
+    });
+  </script>
+</body>
+</html>
